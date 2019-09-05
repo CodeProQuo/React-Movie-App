@@ -1,26 +1,32 @@
 import React from 'react';
-import logo from './logo.svg';
+import axios from 'axios';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
+      <Movie/>
     </div>
   );
+}
+
+class Movie extends React.Component {
+  render() {
+    return (
+      <div onClick={this.getMoviesPop()}>
+        <h1>Hey hey</h1>
+      </div>
+    );
+  }
+
+  getMoviesPop() {
+    axios.get('http://api.themoviedb.org/3/movie/popular?api_key=06cbaa9260ed2be2d7c6e61239a26ab8').then(response => console.log(response));
+  }
 }
 
 export default App;

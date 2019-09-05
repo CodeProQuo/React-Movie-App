@@ -1,0 +1,61 @@
+{
+  "env": {
+    "browser": true,
+    "node": true,
+    "commonjs": true,
+    "es6": true,
+    "jest": true,
+  },
+  "extends": "airbnb",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "commonjs": true,
+      "experimentalObjectRestSpread": true,
+      "jsx": true,
+    },
+    "sourceType": "module"
+  },
+  "plugins": [
+    "react",
+  ],
+  "parser": "babel-eslint",
+  "rules": {
+    "arrow-body-style": ["error","always"],
+    "arrow-parens": ["error","always"],
+    "brace-style": ["error", "1tbs", { "allowSingleLine": true }],
+    "no-underscore-dangle": ["off"],
+    "no-plusplus": ["off"],
+    "object-curly-newline": ["error", { "consistent": true }],
+    "object-shorthand": ["error", "consistent-as-needed"],
+    "quotes": ["error", "double"],
+    "operator-linebreak":"off",
+    "react/default-props-match-prop-types": ["off"],
+    "react/jsx-closing-bracket-location": ["off"],
+    "react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx"] }],
+    "react/jsx-wrap-multilines": ["error", {
+        "declaration": "parens",
+        "assignment": "parens",
+        "return": "parens",
+        "arrow": "parens",
+        "condition": "ignore",
+        "logical": "ignore",
+        "prop": "ignore"
+      }
+    ],
+    "react/prefer-stateless-function": ["error", { "ignorePureComponents": true }],
+    "react/prop-types": ["off"],
+    "react/require-default-props": ["off"],
+    "react/forbid-prop-types": ["off"],
+    "import/no-cycle": ["off"]
+  },
+  "globals": {
+    // From Enzyme
+    "mount": false,
+    "render": false,
+    "shallow": false,
+    "shallowToJson": false,
+    // Cypress
+    "cy": false,
+    "before": false,
+  }
+}

@@ -1,0 +1,92 @@
+.ReleaseDate {
+    font-family: Helvetica;
+    font-size: 24px;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #747474;
+}
+
+.Runtime {
+    font-family: Helvetica;
+    font-size: 24px;
+    font-weight: normal;
+    font-style: oblique;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #747474;
+}
+
+.Rating {
+    font-family: Helvetica;
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #000000;
+    padding: 10px 0px 10px 0px;
+}
+
+.Overview {
+    font-family: Helvetica;
+    font-size: 12px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.28px;
+    text-align: left;
+    color: #747474;
+}
+
+.MovieDetailHeader {
+    background-color: #009688;
+    min-height: 10vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.MovieTitle{
+    width: 327px;
+    height: 38px;
+    font-family: Helvetica;
+    font-size: 32px;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #ffffff;
+}
+
+.Favorite {
+    width: 112px;
+    height: 48px;
+    border: solid 1px #6fcac2;
+    background-color: #86e4db;
+}
+
+.Container {
+    padding: 10px 16px 16px 16px;
+}
+
+.Wrapper {
+    display: flex;
+}
+
+.Info {
+    padding-left: 20px;
+}

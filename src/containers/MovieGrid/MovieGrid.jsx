@@ -26,7 +26,6 @@ class MovieGrid extends React.Component {
 
   componentDidMount() {
     this.queryMovies();
-    console.log("API KEY:" + API_KEY);
   }
 
   componentDidUpdate(prevProps) {

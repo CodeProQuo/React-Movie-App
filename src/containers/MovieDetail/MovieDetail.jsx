@@ -13,34 +13,41 @@ class MovieDetail extends React.Component {
   componentDidMount() {
     this.props.title("MovieDetail");
     const {id} = this.props.match.params;
-    const favorites = localStorage.getItem('favorites');
+    const favorites = JSON.parse(localStorage.getItem('favorites'));
     if (id) {
       axios.get(BASE_URL + this.props.match.params.id + "?api_key=" + API_KEY).then(response => {
         this.setState({movieDetail: response.data});
       })
     }
-    if (favorites && favorites.includes(id)){
+    if (favorites && favorites.movies.filter(( movie ) => {
+      return movie.id === id;
+    }).length) {
       this.setState({favorite: true})
     }
   }
 
   favRemove = () => {
-    let favorites = JSON.parse(localStorage.getItem('favorites'))["ids"];
-    for( let i = 0; i < favorites.length; i++){
-      if ( favorites[i] === this.state.movieDetail.id) {
+    let favorites = JSON.parse(localStorage.getItem('favorites')).movies;
+    for (let i = 0; i < favorites.length; i++) {
+      if (favorites[i].id === this.state.movieDetail.id) {
         favorites.splice(i, 1);
       }
     }
-    localStorage.setItem('favorites', JSON.stringify({ids: favorites}));
+    localStorage.setItem('favorites', JSON.stringify({movies: favorites}));
     this.setState({favorite: false});
   }
 
   favAdd = () => {
+    const {id, poster_path, original_title} = this.state.movieDetail;
     let favorites = JSON.parse(localStorage.getItem('favorites'));
     if (favorites == null) {
-      favorites = {ids: []};
+      favorites = {movies: []};
     }
-    favorites.ids.push(this.state.movieDetail.id);
+    favorites.movies.push({
+      id: id,
+      poster_path: poster_path,
+      original_title: original_title
+    });
     localStorage.setItem('favorites', JSON.stringify(favorites));
     this.setState({favorite: true});
   }

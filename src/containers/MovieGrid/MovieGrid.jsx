@@ -12,10 +12,24 @@ class MovieGrid extends React.Component {
   queryMovies() {
     const {nav} = this.props.match.params;
     let title = "";
-    if (nav === "popular") {
-      title = "Popular Movies";
-    } else if (nav === "top_rated") {
-      title = "Top Rated";
+    switch (nav) {
+      case "popular":
+        title = "Popular Movies";
+        break;
+      case "top_rated":
+        title = "Top Rated";
+        break;
+      case "latest":
+        title = "Latest Movies";
+        break;
+      case "upcoming":
+        title = "Upcoming Movies";
+        break;
+      case "now_playing":
+        title = "Now Playing";
+        break;
+      default:
+        break;
     }
     this.props.title(title);
     axios.get(BASE_URL + nav + "?api_key=" + API_KEY).then(

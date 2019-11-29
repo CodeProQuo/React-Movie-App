@@ -38,12 +38,6 @@
     background-color: white;
 }
 
-@media (min-width: 500px) {
-    .DrawerToggle {
-        display: none;
-    }
-}
-
 .arrow {
     border: solid white;
     border-width: 0 3px 3px 0;

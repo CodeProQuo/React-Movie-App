@@ -7,7 +7,7 @@ import { BASE_URL, API_KEY} from "../../httpStrings";
 class MovieGrid extends React.Component {
   state = {
     movies: []
-  }
+  };
 
   queryMovies() {
     const {nav} = this.props.match.params;
@@ -36,12 +36,13 @@ class MovieGrid extends React.Component {
 
   render() {
     const movies = this.state.movies.map(movie => {
+      const { id, poster_path, original_title } = movie;
       return (
-        <Link to={'/movie/' + movie.id} key={movie.id}>
+        <Link to={'/movie/' + id} key={id}>
           <Movie
-            id={movie.id}
-            poster_path={movie.poster_path}
-            original_title={movie.original_title}
+            id={id}
+            poster_path={poster_path}
+            original_title={original_title}
           />
         </Link>)
     });

@@ -3,7 +3,7 @@ import './App.css';
 import {BrowserRouter, Redirect } from "react-router-dom";
 import Layout from './containers/Layout/Layout';
 
-function App() {
+const App = () => {
   return (
     <BrowserRouter>
       <div className="App">
@@ -11,6 +11,6 @@ function App() {
       </div>
     </BrowserRouter>
   );
-}
+};
 
 export default App;

@@ -11,18 +11,13 @@ const MovieGrid = (props) => {
 
   useEffect(() => {
     queryMovies();
-  });
+  }, [nav]);
 
   const queryMovies = () => {
-    let title = "";
-    if (nav === "popular") {
-      title = "Popular Movies";
-    } else if (nav === "top_rated") {
-      title = "Top Rated";
-    }
-    setTitle(title);
     axios.get(`${BASE_URL}${nav}?api_key=${API_KEY}`).then(
-      response => setMovies(response.data.results)
+      response => {
+        setMovies(response.data.results);
+      }
     );
   };
 
@@ -37,6 +32,30 @@ const MovieGrid = (props) => {
         />
       </Link>)
   });
+
+  useEffect(() => {
+    let title = "";
+    switch (nav) {
+      case "popular":
+        title = "Popular Movies";
+        break;
+      case "top_rated":
+        title = "Top Rated";
+        break;
+      case "latest":
+        title = "Latest Movies";
+        break;
+      case "upcoming":
+        title = "Upcoming Movies";
+        break;
+      case "now_playing":
+        title = "Now Playing";
+        break;
+      default:
+        break;
+    }
+    setTitle(title);
+  }, [moviesLinks]);
 
   return (
     <div>

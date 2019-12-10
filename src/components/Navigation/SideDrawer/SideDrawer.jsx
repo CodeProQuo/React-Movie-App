@@ -13,6 +13,8 @@ const SideDrawer = (props) => {
       <ul className="NavList">
         <NavigationItem id="popular">Popular Movies</NavigationItem>
         <NavigationItem id="top_rated">Top Rated</NavigationItem>
+        <NavigationItem id="upcoming">Upcoming</NavigationItem>
+        <NavigationItem id="now_playing">Now Playing</NavigationItem>
         <NavigationItem id="favorites">Favorites</NavigationItem>
       </ul>
     </div>

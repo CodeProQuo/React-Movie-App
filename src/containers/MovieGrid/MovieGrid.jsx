@@ -16,6 +16,7 @@ const MovieGrid = (props) => {
   const queryMovies = () => {
     axios.get(`${BASE_URL}${nav}?api_key=${API_KEY}`).then(
       response => {
+        console.log(response);
         setMovies(response.data.results);
       }
     );
@@ -41,9 +42,6 @@ const MovieGrid = (props) => {
         break;
       case "top_rated":
         title = "Top Rated";
-        break;
-      case "latest":
-        title = "Latest Movies";
         break;
       case "upcoming":
         title = "Upcoming Movies";

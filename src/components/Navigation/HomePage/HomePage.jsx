@@ -10,8 +10,6 @@ const HomePage = (props) => {
 
         <NavigationItem id="top_rated">Top Rated</NavigationItem>
 
-        <NavigationItem id="latest">Latest</NavigationItem>
-
         <NavigationItem id="upcoming">Upcoming</NavigationItem>
 
         <NavigationItem id="now_playing">Now Playing</NavigationItem>

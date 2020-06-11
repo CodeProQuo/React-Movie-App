@@ -12,7 +12,7 @@ const Trailers = (props) => {
     axios.get(`${BASE_URL}${id}/videos?api_key=${API_KEY}`).then(
       response => setVideos(response.data.results)
     );
-  }, []);
+  }, [id]);
 
   let index = 0;
   const trailers = videos.filter(

@@ -15,6 +15,7 @@ const Trailer = (props) => {
         <iframe
                 src={"https://www.youtube.com/embed/" + url_key}
                 frameBorder="0"
+                title="Title"
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen/>
       </div>

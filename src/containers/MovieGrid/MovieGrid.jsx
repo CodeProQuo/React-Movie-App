@@ -10,17 +10,18 @@ const MovieGrid = (props) => {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
+
+    const queryMovies = () => {
+        axios.get(`${BASE_URL}${nav}?api_key=${API_KEY}`).then(
+            response => {
+                console.log(response);
+                setMovies(response.data.results);
+            }
+        );
+    };
+
     queryMovies();
   }, [nav]);
-
-  const queryMovies = () => {
-    axios.get(`${BASE_URL}${nav}?api_key=${API_KEY}`).then(
-      response => {
-        console.log(response);
-        setMovies(response.data.results);
-      }
-    );
-  };
 
   const moviesLinks = movies.map(movie => {
     const {id, poster_path, original_title} = movie;
@@ -53,7 +54,7 @@ const MovieGrid = (props) => {
         break;
     }
     setTitle(title);
-  }, [moviesLinks]);
+  }, [moviesLinks, nav, setTitle]);
 
   return (
     <div>

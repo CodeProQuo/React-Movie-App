@@ -1,17 +1,14 @@
 import React from 'react';
 import './HomePage.css';
-import {Link} from "react-router-dom";
 import NavigationItem from "../NavigationItem/NavigationItem";
 
-const homePage = (props) => {
+const HomePage = (props) => {
   return (
     <div>
       <ul className="NavList">
         <NavigationItem id="popular">Popular Movies</NavigationItem>
 
         <NavigationItem id="top_rated">Top Rated</NavigationItem>
-
-        <NavigationItem id="latest">Latest</NavigationItem>
 
         <NavigationItem id="upcoming">Upcoming</NavigationItem>
 
@@ -21,6 +18,6 @@ const homePage = (props) => {
       </ul>
     </div>
   );
-}
+};
 
-export default homePage;
+export default HomePage;

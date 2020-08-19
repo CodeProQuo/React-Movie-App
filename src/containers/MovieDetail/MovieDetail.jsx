@@ -1,96 +1,83 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from "axios";
 import './MovieDetail.css';
 import Trailers from '../Trailers/Trailers';
 import {BASE_URL, API_KEY, IMAGES_BASE_URL} from "../../httpStrings";
 
-class MovieDetail extends React.Component {
-  state = {
-    movieDetail: null,
-    favorite: false,
-  }
+const MovieDetail = (props) => {
+  const {title} = props;
+  const {id} = props.match.params;
+  const [movieDetail, setDetails] = useState(null);
+  const [favorite, setFavorite] = useState(false);
 
-  componentDidMount() {
-    this.props.title("MovieDetail");
-    const {id} = this.props.match.params;
-    const favorites = JSON.parse(localStorage.getItem('favorites'));
+  useEffect(() => {
+    title("MovieDetail");
+    const favorites = localStorage.getItem('favorites');
     if (id) {
-      axios.get(BASE_URL + this.props.match.params.id + "?api_key=" + API_KEY).then(response => {
-        this.setState({movieDetail: response.data});
+      axios.get(`${BASE_URL}${id}?api_key=${API_KEY}`).then(response => {
+        setDetails(response.data);
       })
     }
-    if (favorites && favorites.movies.filter(( movie ) => {
-      return movie.id === id;
-    }).length) {
-      this.setState({favorite: true})
+    if (favorites && favorites.includes(id)) {
+      setFavorite(true);
     }
-  }
+  }, []);
 
-  favRemove = () => {
-    let favorites = JSON.parse(localStorage.getItem('favorites')).movies;
+  const favRemove = () => {
+    let favorites = JSON.parse(localStorage.getItem('favorites'))["ids"];
     for (let i = 0; i < favorites.length; i++) {
-      if (favorites[i].id === this.state.movieDetail.id) {
+      if (favorites[i] === movieDetail.id) {
         favorites.splice(i, 1);
       }
     }
-    localStorage.setItem('favorites', JSON.stringify({movies: favorites}));
-    this.setState({favorite: false});
-  }
+    localStorage.setItem('favorites', JSON.stringify({ids: favorites}));
+    setFavorite(false);
+  };
 
-  favAdd = () => {
-    const {id, poster_path, original_title} = this.state.movieDetail;
+  const favAdd = () => {
     let favorites = JSON.parse(localStorage.getItem('favorites'));
     if (favorites == null) {
-      favorites = {movies: []};
+      favorites = {ids: []};
     }
-    favorites.movies.push({
-      id: id,
-      poster_path: poster_path,
-      original_title: original_title
-    });
+    favorites.ids.push(movieDetail.id);
     localStorage.setItem('favorites', JSON.stringify(favorites));
-    this.setState({favorite: true});
-  }
+    setFavorite(true);
+  };
 
-  render() {
-    const movieDetail = this.state.movieDetail;
-    let movieDetailJsx = (
-      <header className="MovieDetailHeader">
-      </header>
-    );
-    if (movieDetail) {
-      movieDetailJsx = (
-        <div>
-          <header className="MovieDetailHeader">
-            <p className="MovieTitle">{movieDetail.original_title}</p>
-          </header>
-          <div className="Container">
-            <div className="Wrapper">
-              <img src={IMAGES_BASE_URL + "w154" + movieDetail.poster_path} alt={movieDetail.original_title}/>
-              <div className="Info">
-                <div className="ReleaseDate">
-                  {movieDetail.release_date.substr(0, 4)}
-                </div>
-                <div className="Runtime">
-                  {movieDetail.runtime} min
-                </div>
-                <div className="Rating">
-                  {movieDetail.vote_average}/10
-                </div>
-                <button onClick={this.state.favorite ? this.favRemove :
-                  this.favAdd
-                }
-                        className="Favorite">{this.state.favorite ? "UNFAVORITE" : "MARK AS FAVORITE"}</button>
+  let movieDetailJsx = (
+    <header className="MovieDetailHeader">
+    </header>
+  );
+  if (movieDetail) {
+    movieDetailJsx = (
+      <div>
+        <header className="MovieDetailHeader">
+          <p className="MovieTitle">{movieDetail.original_title}</p>
+        </header>
+        <div className="Container">
+          <div className="Wrapper">
+            <img src={`${IMAGES_BASE_URL}w154${movieDetail.poster_path}`} alt={movieDetail.original_title}/>
+            <div className="Info">
+              <div className="ReleaseDate">
+                {movieDetail.release_date.substr(0, 4)}
               </div>
+              <div className="Runtime">
+                {movieDetail.runtime} min
+              </div>
+              <div className="Rating">
+                {movieDetail.vote_average}/10
+              </div>
+              <button onClick={favorite ? favRemove : favAdd}
+                      className="Favorite">{favorite ? "UNFAVORITE" : "MARK AS FAVORITE"}</button>
             </div>
-            <p className="Overview">{movieDetail.overview}</p>
-            <Trailers id={movieDetail.id}/>
           </div>
+          <p className="Overview">{movieDetail.overview}</p>
+          <Trailers id={movieDetail.id}/>
         </div>
-      );
-    }
-    return movieDetailJsx;
+      </div>
+    );
   }
-}
+  return movieDetailJsx;
+};
 
 export default MovieDetail;
